@@ -1,0 +1,39 @@
+.table {
+    display: table;
+}
+.row {
+    display: table-row;
+}
+.cell {
+    display: table-cell;
+}
+/*.description {
+    display: none;
+}*/
+.table_main {
+    width: 100%;
+}
+.cell_character {
+    width: 20%;
+}
+.cell_skillsListCustom {
+    width: 30%;
+}
+.cell_skillsListGeneral {
+    width: 50%;
+}
+.cell_skillsListGeneral_skills {
+    width: 70%;
+}
+.cells_skillsListGeneral_subCategory {
+    width: 30%;
+}
+.cell_price {
+    width: 10%;
+}
+.cell_skill {
+    width: 90%;
+}
+.cell_totalPrice {
+    width: 100%;
+}
