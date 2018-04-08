@@ -160,9 +160,7 @@ function SkillsListGeneral(CustomSkills, $http, $q) {
             console.log( JSON.stringify( response ) );
             listGeneral.skillsList = response;
         
-        }, false );
-        
-        
+        }, false );  
     
     };
  
@@ -244,11 +242,9 @@ function CustomSkillsService() {
         subCategories: [],
         displaySubCategorySkillsList: []
         };
-    var choosedSkillsList = {};
+    var chosenSkillsList = {};
     
     service.chooseSkill = function(skill) {
-    
-        //skills.list.push(skill);
         
         var posIns = GetPosToInsertSkill(skills.list, skill);
         skills.list.splice(posIns, 0, skill);
@@ -284,14 +280,16 @@ function CustomSkillsService() {
         }
         
         //збільшення кількості екземплярів здібності, що були додані до набору
-        choosedSkillsList[skill.skill] = ++choosedSkillsList[skill.skill] || 1;
+        ChangeChosenSkillsList(skill, true);
+        //choosedSkillsList[skill.skill] = ++choosedSkillsList[skill.skill] || 1;
     
     };
     
     service.removeSkill = function(index) {
     
         //зменшення кількості екземплярів здібності, що були додані до набору
-        choosedSkillsList[ skills.list[index].skill ]--;
+        ChangeChosenSkillsList(skills.list[ index ], false);
+        //choosedSkillsList[ skills.list[index].skill ]--;
         
         skills.totalPrice -= skills.list[index].price;
         var subCat = skills.list[index].subCategory;
@@ -318,20 +316,42 @@ function CustomSkillsService() {
     
     service.getChoosedSkillsList = function() {
     
-        return choosedSkillsList;
+        return chosenSkillsList;
     
     };
     
     service.IsSkillEnable = function(skill) {
-    
-        if( choosedSkillsList[skill.skill] === undefined ) return true;
         
-        if( choosedSkillsList[skill.skill] < skill.stats.statControl[0][1001] )
-            return true;
+        if( chosenSkillsList[skill.id.subCategoryId] === undefined ) 
+          return true;
+      
+        if( chosenSkillsList[skill.id.subCategoryId][skill.id.skillId] === 
+           undefined ) return true;
+        
+        if( chosenSkillsList[skill.id.subCategoryId][skill.id.skillId] < 
+           skill.stats.statControl[0][1001] ) return true;
             
         return false;
     
     };
+  
+  function ChangeChosenSkillsList( skill, addBool ) {
+    
+    if( addBool ) {
+      
+      chosenSkillsList[ skill.id.subCategoryId ] = 
+        chosenSkillsList[ skill.id.subCategoryId ] || {};
+      
+      chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ] = 
+        ++chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ] || 1;
+      
+    } else {
+      
+      --chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ];
+      
+    }
+    
+  }
 
 }
 
