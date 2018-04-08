@@ -1,15 +1,17 @@
 .table {
     display: table;
+    border-spacing: 2px;
 }
 .row {
     display: table-row;
 }
 .cell {
     display: table-cell;
+    border: 1px solid black;
 }
-/*.description {
-    display: none;
-}*/
+.description {
+    background: #ecf0f1;
+}
 .table_main {
     width: 100%;
 }
@@ -36,4 +38,55 @@
 }
 .cell_totalPrice {
     width: 100%;
+}
+.subCategorySeparator {
+    margin: 10px 0px;
+}
+.itemWrapper {
+    border-bottom: 1px solid black;
+    clear: both;
+}
+.expSpend {
+    display: inline-block;
+    float: right;
+    border-bottom: 1px solid black;
+}
+.eventsNote {
+    position: absolute;
+    width: 40%;
+    left: 30%;
+    top: 5%;
+    background-color: yellow;
+    border: 1px solid black;
+    padding: 1px;    
+
+}
+.eventsNoteWrapper {
+    position: relative;
+    border: 1px solid black;
+    padding: 1px 5px;
+}
+.closed {
+    display: none;
+}
+.date {
+    display: inline-block;
+    float: right;
+    border-bottom: 1px solid black;
+    margin-bottom: 3px;
+}
+.message {
+    display: inline-block;
+    clear: both;
+    border-bottom: 1px solid black;
+}
+.eventsNote_header{
+    text-align: center;
+}
+.eventsNote_footer {
+    margin-top: 10px;
+    text-align: center;
+}
+.messageBreaker {
+
 }

@@ -1,20 +1,21 @@
 <html>
 <head>
     <title>Skills Set .01</title>
-    <meta charset = "utf8"></meta>
-    <link rel = "stylesheet" type = "text/css" href = "skillsSet.css"></link>
+    <meta charset = "utf-8">
+    <link rel = "stylesheet" type = "text/css" href = "skillsSet.css">
+    <script src = "lodash.min.js"></script>
     <script src = "angular.min.js"></script>
     <script src = "skillsSet.js"></script>
 </head>
-<body>
+<body ng-app = "SkillsSet_01">
 
-<div class = "table table_main" ng-app = "SkillsSet_01">
+<div class = "table table_main">
 
     <div class = "row">
         
         <!--Відображаються характеристики персонажу-->
         <div class = "cell cell_character">
-        
+            
         </div>
     
         <!--Відображається набір здібностей для персонажу -->
@@ -25,7 +26,7 @@
             <div class = "table">
             
                 <div class = "row">
-                    <div class = "cell cell_totalPrice"> 
+                    <div> 
                         <b>Истрачено опыта: {{listCustom.skillsList.totalPrice}}</b>
                     </div>
                 </div>
@@ -34,44 +35,56 @@
             
             <!--Вибрані персонажем здібності -->
             <!--Заголовки комірок -->
-            <div class = "table">
-
-                <div class = "row">
-                
-                    <div class = "cell cell_price">
-                    
-                        <b>Цена</b>
-                    
-                    </div>
-                    
-                    <div class = "cell cell_skill">
-                    
-                        <b>Способность</b>
-                    
-                    </div>
-                
-                </div>
-                
-                         
-                <!--Вибрані персонажем здібності -->
-                <div class = "row" ng-repeat = "item in listCustom.skillsList.list track by $index">
-        
-                    <div class = "cell cell_price" ng-click = "listCustom.removeSkill($index)">
-                        {{item.price}}
-                    </div>
-                    <div class = "cell cell_skill">
-                        <div ng-click = "listCustom.clickOnSkill(item.skill)">
-                            {{item.skill}}
-                        </div>
-                        <div class = "description"
-                            ng-if = "listCustom.displaySkillDescription.indexOf( item.skill ) !== -1">
-                            {{item.description}}
-                        </div>
-                    </div>
-        
-                </div>                
             
-            </div>
+            <div class = "subCategorySeparator"
+                ng-repeat = "subCategory in listCustom.skillsList.subCategories">
+            
+                <div class = "itemWrapper">
+                    <div ng-click = "listCustom.clickOnSubCategory(subCategory)">
+                        <div><b>{{subCategory}}: {{listCustom.getSkillsOnSubCategory(subCategory)}}</b></div>
+                    </div>
+                
+                    <div ng-if = "listCustom.skillsList.displaySubCategorySkillsList.indexOf( subCategory ) !== -1">
+                
+                    <div class = "table">
+                
+                        <div class = "row" 
+                            ng-repeat = "skill in listCustom.skillsList.list track by $index"
+                            ng-if = "skill.subCategory === subCategory">
+                    
+                            <div class = "cell cell_price" ng-click = "listCustom.removeSkill($index)"> 
+                                -{{skill.price}}
+                            </div>
+
+                            <div class = "cell cell_skill">
+                                <div 
+                                    ng-click = "listCustom.clickOnSkill(skill.skill)"
+                                    ng-if = "listCustom.displaySkillDescription.indexOf( skill.skill ) !== -1">
+                                    <b>{{skill.skill}}</b>
+                                </div>
+                                <div 
+                                    ng-click = "listCustom.clickOnSkill(skill.skill)"
+                                    ng-if = "listCustom.displaySkillDescription.indexOf( skill.skill ) === -1">
+                                    {{skill.skill}}
+                                </div>
+                                <div class = "description"
+                                    ng-if = "listCustom.displaySkillDescription.indexOf( skill.skill ) !== -1">
+                                    {{skill.description}}
+                                </div>
+                            </div>
+                    
+                        </div>
+                
+                    </div>
+                
+                    <div class = "expSpend">
+                        <b>Истрачено: {{listCustom.getExpSpendOnSubCategory(subCategory)}}</b>
+                    </div>
+                
+                    </div>
+                </div>
+            
+            </div>            
         
         </div>
 
@@ -89,7 +102,7 @@
                 
                             <div class = "cell cell_price">
                     
-                                <b>Цена</b>
+                                <b>+</b>
                     
                             </div>
                     
@@ -103,14 +116,35 @@
                         
                         <!--Список здібностей з підкатегорії-->
                         <div class = "row" 
-                            ng-repeat = "item in listGeneral.skillsList"
-                            ng-if = "item.subCategory === listGeneral.curSubCategory">
-            
-                            <div class = "cell" ng-click = "listGeneral.chooseSkill($index)">
+                            ng-repeat = "item in listGeneral.skillsList">
+                                
+                            <div class = "cell" 
+                                ng-click = "listGeneral.chooseSkill($index)"                                
+                                ng-if = "listGeneral.isSkillEnableByCount(item)"
+                            >
+                                <div ng-if = "listGeneral.isSkillEnableByRequirements(item)">
+                                    +{{item.price}}
+                                </div>
+                                <div ng-if = "!listGeneral.isSkillEnableByRequirements(item)">
                                     {{item.price}}
+                                </div>
                             </div>
+                            <div class = "cell"
+                                ng-if = "!listGeneral.isSkillEnableByCount(item)"
+                                >
+                                    
+                            </div>
+                            
+                            
                             <div class = "cell">
-                                <div ng-click = "listGeneral.clickOnSkill(item.skill)">
+                                <div 
+                                    ng-click = "listGeneral.clickOnSkill(item.skill)"
+                                    ng-if = "listGeneral.displaySkillDescription.indexOf( item.skill ) !== -1">
+                                    <b>{{item.skill}}</b>
+                                </div>
+                                <div 
+                                    ng-click = "listGeneral.clickOnSkill(item.skill)"
+                                    ng-if = "listGeneral.displaySkillDescription.indexOf( item.skill ) === -1">
                                     {{item.skill}}
                                 </div>
                                 <div class = "description"
@@ -141,9 +175,9 @@
                         
                         <!--Список підкатегорій здібностей -->
                         <div class = "row" ng-repeat = "item in listGeneral.subCategoriesList"
-                            ng-click = "listGeneral.setSubCategory($index)">
+                            ng-click = "listGeneral.chooseSubCategory($index)">
             
-                            <div class = "cell">{{item}}</div>
+                            <div class = "cell">{{item.SubCategory}}</div>
             
                         </div>
         
@@ -156,8 +190,25 @@
         </div>
     
     </div> 
-        
+</div>   
+<div class = "eventsNote" ng-controller = "EventsNote as events">
+    <div class = "eventsNoteWrapper">
+    <div class = "eventsNote_header">
+        <h3>Журнал изменений</h3>
+    </div>
+    <div class = "eventsNote_body">
+        <div class = "messageContainer" ng-repeat = "message in events.messages">
+            <b class = "date">{{message.date}}</b>
+            <br>
+            <div class = "message">{{events.setMessage($index)}}</div>
+        </div>
+    </div>
+    <div class = "eventsNote_footer">
+        <button ng-click = "events.closeEventsNote()">Закрыть</button>
+    </div>
+    </div>
 </div>
+
 
 </body>
 </html>
