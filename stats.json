@@ -1,0 +1,381 @@
+﻿[
+   {
+      "statId" : 1,
+      "statName" : "HP",
+      "statHide" : false
+   },
+   {
+      "statId" : 2,
+      "statName" : "MP",
+      "statHide" : false
+   },
+   {
+      "statId" : 3,
+      "statName" : "Ходьба",
+      "statHide" : false
+   },
+   {
+      "statId" : 4,
+      "statName" : "Бег",
+      "statHide" : false
+   },
+   {
+      "statId" : 5,
+      "statName" : "Уклонение",
+      "statHide" : false
+   },
+   {
+      "statId" : 6,
+      "statName" : "Маг. уклонение",
+      "statHide" : false
+   },
+   {
+      "statId" : 7,
+      "statName" : "Защита",
+      "statHide" : false
+   },
+   {
+      "statId" : 8,
+      "statName" : "Блок",
+      "statHide" : false
+   },
+   {
+      "statId" : 9,
+      "statName" : "Восст. HP",
+      "statHide" : false
+   },
+   {
+      "statId" : 10,
+      "statName" : "Восст. MP",
+      "statHide" : false
+   },
+   {
+      "statId" : 11,
+      "statName" : "Скрытность",
+      "statHide" : false
+   },
+   {
+      "statId" : 12,
+      "statName" : "Обнаружение",
+      "statHide" : false
+   },
+   {
+      "statId" : 13,
+      "statName" : "Невидимость",
+      "statHide" : false
+   },
+   {
+      "statId" : 14,
+      "statName" : "Физ. способности\r\n",
+      "statHide" : true
+   },
+   {
+      "statId" : 15,
+      "statName" : "Маг. способности",
+      "statHide" : true
+   },
+   {
+      "statId" : 16,
+      "statName" : "Тех. способности",
+      "statHide" : true
+   },
+   {
+      "statId" : 17,
+      "statName" : "Мистицизм",
+      "statTypeId" : 14,
+      "statHide" : false
+   },
+   {
+      "statId" : 18,
+      "statName" : "Рукопашный бой",
+      "statTypeId" : 14,
+      "statHide" : false
+   },
+   {
+      "statId" : 19,
+      "statName" : "Колющее оружие\r\n",
+      "statTypeId" : 14,
+      "statHide" : false
+   },
+   {
+      "statId" : 20,
+      "statName" : "Рубящее оружие\r\n",
+      "statTypeId" : 14,
+      "statHide" : false
+   },
+   {
+      "statId" : 21,
+      "statName" : "Дробящее оружие\r\n",
+      "statTypeId" : 14,
+      "statHide" : false
+   },
+   {
+      "statId" : 22,
+      "statName" : "Режущее оружие\r\n",
+      "statTypeId" : 14,
+      "statHide" : false
+   },
+   {
+      "statId" : 23,
+      "statName" : "Щиты\r\n",
+      "statTypeId" : 14,
+      "statHide" : false
+   },
+   {
+      "statId" : 24,
+      "statName" : "Оружие дальнего боя\r\n",
+      "statTypeId" : 14,
+      "statHide" : false
+   },
+   {
+      "statId" : 25,
+      "statName" : "Скрытность",
+      "statTypeId" : 14,
+      "statHide" : false
+   },
+   {
+      "statId" : 26,
+      "statName" : "Магия огня",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 27,
+      "statName" : "Магия воды",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 28,
+      "statName" : "Магия воздуха",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 29,
+      "statName" : "Магия земли",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 30,
+      "statName" : "Магия природы",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 31,
+      "statName" : "Магия света",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 32,
+      "statName" : "Демоническая магия",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 33,
+      "statName" : "Магия проклятия",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 34,
+      "statName" : "Некромантия",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 35,
+      "statName" : "Магия тени",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 36,
+      "statName" : "Магия крови",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 37,
+      "statName" : "Шаманизм",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 38,
+      "statName" : "Магия вуду",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 39,
+      "statName" : "Псионика",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 40,
+      "statName" : "Психокинез",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 41,
+      "statName" : "Магия иллюзий",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 42,
+      "statName" : "Пространственная магия",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 43,
+      "statName" : "Рунная магия",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 44,
+      "statName" : "Магия звука",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 45,
+      "statName" : "Искажение реальности",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 46,
+      "statName" : "Техника сна",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 47,
+      "statName" : "Материализация",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 48,
+      "statName" : "Изменение тела",
+      "statTypeId" : 15,
+      "statHide" : false
+   },
+   {
+      "statId" : 49,
+      "statName" : "Органическое развитие",
+      "statTypeId" : -1,
+      "statHide" : false
+   },
+   {
+      "statId" : 50,
+      "statName" : "Медицина",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 51,
+      "statName" : "Алхимия",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 52,
+      "statName" : "Питомцы",
+      "statTypeId" : -1,
+      "statHide" : false
+   },
+   {
+      "statId" : 53,
+      "statName" : "Оружейное дело",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 54,
+      "statName" : "Создание брони",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 55,
+      "statName" : "Создание ловушек",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 57,
+      "statName" : "Высокотехнологичное оружие",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 58,
+      "statName" : "Лазерное оружие",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 58,
+      "statName" : "Инженерное дело",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 59,
+      "statName" : "Кибернетика",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 60,
+      "statName" : "Робототехника",
+      "statTypeId" : 16,
+      "statHide" : false
+   },
+   {
+      "statId" : 61,
+      "statName" : "Текст",
+      "statHide" : true
+   },
+   {
+      "statId" : 1001,
+      "statName" : "Сколько раз можно брать",
+      "statHide" : true
+   },
+   {
+      "statId" : 1002,
+      "statName" : "Зависимости",
+      "statHide" : true
+   },
+   {
+      "statId" : 1003,
+      "statName" : "Адаптация",
+      "statHide" : true
+   },
+   {
+      "statId" : 1004,
+      "statName" : "Зависимость наличия способностей",
+      "statHide" : true
+   },
+   {
+      "statId" : 1005,
+      "statName" : "Тип способности",
+      "statHide" : true
+   },
+   {
+      "statId" : 1006,
+      "statName" : "Несовместимость к способностям",
+      "statHide" : true
+   }
+]

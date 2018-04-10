@@ -16,7 +16,7 @@ function SkillsListGeneral(CustomSkills, $http, $q) {
     listGeneral.displaySkillDescription = [];
     listGeneral.skillsList = [];
     listGeneral.subCategoriesList = [];
-    listGeneral.choosedSkillsList = CustomSkills.getChoosedSkillsList();
+    listGeneral.chosenSkillsList = CustomSkills.getChosenSkillsList();
     
     var promise = LoadSubCategoriesList();
     promise.then(function(result) {
@@ -35,8 +35,10 @@ function SkillsListGeneral(CustomSkills, $http, $q) {
     
     };
     
+    // вибір підкатегорії
     listGeneral.chooseSubCategory = function(index) {
-    
+        
+        // якщо підкатегорія не містить здібностей - завантажити
         if( listGeneral.subCategoriesList[index].skillsList === undefined ) {
         
             var promise = LoadSubCategorySkillsList( listGeneral.subCategoriesList[index].path );
@@ -78,6 +80,7 @@ function SkillsListGeneral(CustomSkills, $http, $q) {
     
     };
 
+    // показ\ховання опису здібності при натисканні
     listGeneral.clickOnSkill = function(skill) {
     
         var pos = listGeneral.displaySkillDescription.indexOf( skill );
@@ -93,18 +96,29 @@ function SkillsListGeneral(CustomSkills, $http, $q) {
     
     };
     
+    // перевірка доступності здібності для вибору по: кількості екземплярів
     listGeneral.isSkillEnableByCount = function(skill) {
     
         return CustomSkills.IsSkillEnable(skill);
     
     };
     
+    // наявність в списку здібностей, від яких залежить вибір данної
     listGeneral.isSkillEnableByRequirements = function( skill ) {
-    
-        return true;
+        
+        if( skill.stats.statControl[1004] === undefined ) return true;
+        
+        if( skill.stats.statControl[1004].every( function( skillId ) {
+        
+            return CustomSkills.IsSkillInList( skillId );
+        
+        } ) ) return true;
+        
+        return false;
     
     };
     
+    // завантаження списку підкатегорій з файлу
     function LoadSubCategoriesList(list) {
     
         var deffered = $q.defer();
@@ -244,6 +258,7 @@ function CustomSkillsService() {
         };
     var chosenSkillsList = {};
     
+    // додавання здібності у список
     service.chooseSkill = function(skill) {
         
         var posIns = GetPosToInsertSkill(skills.list, skill);
@@ -285,16 +300,22 @@ function CustomSkillsService() {
     
     };
     
+    // видалення здібності зі списку
     service.removeSkill = function(index) {
     
-        //зменшення кількості екземплярів здібності, що були додані до набору
-        ChangeChosenSkillsList(skills.list[ index ], false);
-        //choosedSkillsList[ skills.list[index].skill ]--;
         
-        skills.totalPrice -= skills.list[index].price;
-        var subCat = skills.list[index].subCategory;
+        var skill = skills.list[ index ];
+        
+        //зменшення кількості екземплярів здібності, що були додані до набору
+        ChangeChosenSkillsList(skill, false);       
+        
+        // видалення здібності зі списку
+        skills.totalPrice -= skill.price;
+        var subCat = skill.subCategory;
         skills.list.splice(index, 1);
         
+        // видалення категорії здібності з списку категорії, якщо в ній
+        // не залишилось жодної здібності
         if(skills.list.some(function(skill) {
         
             return skill.subCategory === subCat;
@@ -305,6 +326,24 @@ function CustomSkillsService() {
         
         }
         
+        // рекурсійний пошук і видалення здібностей, які залежать від видаленої
+        if( Boolean( chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ] ) === false ) {        
+            
+            console.log( 'deleting ', skill.skill );
+            
+            var linkedSkillIndex = GetLinkedSkillIndex( skill.id );
+            
+            console.log( 'next index ', linkedSkillIndex );
+            
+            while( ~linkedSkillIndex ) {
+            
+                service.removeSkill( linkedSkillIndex );
+                
+                linkedSkillIndex = GetLinkedSkillIndex( skill.id );
+                
+            }
+   
+        }
         
     };
     
@@ -314,12 +353,13 @@ function CustomSkillsService() {
     
     };
     
-    service.getChoosedSkillsList = function() {
+    service.getChosenSkillsList = function() {
     
         return chosenSkillsList;
     
     };
     
+    // доступність здібності для вибору по: кількості екземплярів
     service.IsSkillEnable = function(skill) {
         
         if( chosenSkillsList[skill.id.subCategoryId] === undefined ) 
@@ -329,9 +369,17 @@ function CustomSkillsService() {
            undefined ) return true;
         
         if( chosenSkillsList[skill.id.subCategoryId][skill.id.skillId] < 
-           skill.stats.statControl[0][1001] ) return true;
+           skill.stats.statControl[1001] ) return true;
             
         return false;
+    
+    };
+    
+    service.IsSkillInList = function( skillId ) {
+    
+        if( chosenSkillsList[ skillId.subCategoryId ] === undefined ) return false;
+        
+        return chosenSkillsList[ skillId.subCategoryId ][ skillId.skillId ];
     
     };
   
@@ -351,6 +399,35 @@ function CustomSkillsService() {
       
     }
     
+  }
+  
+  function GetLinkedSkillIndex( id ) {
+
+    var index = -1;
+    
+    console.log( 'matching id ', id.subCategoryId + ' : ' + id.skillId );
+    
+    skills.list.some( function( skill, i ) {
+        
+        var linkedArr = skill.stats.statControl[1004];
+        
+        if( linkedArr === undefined ) return false;
+        
+        for( var j = 0; j < linkedArr.length; j++ ) {
+        
+            if( (linkedArr[j].subCategoryId === id.subCategoryId) && (linkedArr[j].skillId === id.skillId) ) {            
+            
+                index = i;
+                return true;
+            
+            }
+        
+        }
+    
+    } );
+    
+    return index;
+  
   }
 
 }

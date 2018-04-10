@@ -118,11 +118,11 @@
                         <div class = "row" 
                             ng-repeat = "item in listGeneral.skillsList">
                                 
-                            <div class = "cell" 
-                                ng-click = "listGeneral.chooseSkill($index)"                                
-                                ng-if = "listGeneral.isSkillEnableByCount(item)"
-                            >
-                                <div ng-if = "listGeneral.isSkillEnableByRequirements(item)">
+                            <div class = "cell"
+                                ng-if = "listGeneral.isSkillEnableByCount(item)">
+                                
+                                <div ng-if = "listGeneral.isSkillEnableByRequirements(item)"
+                                    ng-click = "listGeneral.chooseSkill($index)">
                                     +{{item.price}}
                                 </div>
                                 <div ng-if = "!listGeneral.isSkillEnableByRequirements(item)">
@@ -130,10 +130,7 @@
                                 </div>
                             </div>
                             <div class = "cell"
-                                ng-if = "!listGeneral.isSkillEnableByCount(item)"
-                                >
-                                    
-                            </div>
+                                ng-if = "!listGeneral.isSkillEnableByCount(item)"></div>
                             
                             
                             <div class = "cell">
@@ -191,7 +188,7 @@
     
     </div> 
 </div>   
-<div class = "eventsNote" ng-controller = "EventsNote as events">
+<div class = "eventsNote closed" ng-controller = "EventsNote as events">
     <div class = "eventsNoteWrapper">
     <div class = "eventsNote_header">
         <h3>Журнал изменений</h3>
