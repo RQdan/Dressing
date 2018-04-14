@@ -433,6 +433,16 @@
             "subCategoryId": 7,
             "skillId": 21
           }
+        ],
+        "1006": [
+          {
+            "subCategoryId": 7,
+            "skillId": 25
+          },
+          {
+            "subCategoryId": 7,
+            "skillId": 24
+          }
         ]
       },
       "statUse": {},
@@ -465,6 +475,16 @@
             "subCategoryId": 7,
             "skillId": 21
           }
+        ],
+        "1006": [
+          {
+            "subCategoryId": 7,
+            "skillId": 25
+          },
+          {
+            "subCategoryId": 7,
+            "skillId": 23
+          }
         ]
       },
       "statUse": {},
@@ -496,6 +516,16 @@
           {
             "subCategoryId": 7,
             "skillId": 21
+          }
+        ],
+        "1006": [
+          {
+            "subCategoryId": 7,
+            "skillId": 24
+          },
+          {
+            "subCategoryId": 7,
+            "skillId": 23
           }
         ]
       },

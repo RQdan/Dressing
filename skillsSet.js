@@ -118,6 +118,12 @@ function SkillsListGeneral(CustomSkills, $http, $q) {
     
     };
     
+    listGeneral.hasConflict = function( skill ) {
+    
+        return false;
+    
+    }
+    
     // завантаження списку підкатегорій з файлу
     function LoadSubCategoriesList(list) {
     

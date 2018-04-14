@@ -87,6 +87,12 @@
     margin-top: 10px;
     text-align: center;
 }
-.messageBreaker {
-
+.skillEnable {
+    background-color: green;
+}
+.skillNotRequired {
+    background-color: yellow;
+}
+.skillNotRequired {
+    background-color: red;
 }

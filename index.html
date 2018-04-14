@@ -52,7 +52,8 @@
                             ng-repeat = "skill in listCustom.skillsList.list track by $index"
                             ng-if = "skill.subCategory === subCategory">
                     
-                            <div class = "cell cell_price" ng-click = "listCustom.removeSkill($index)"> 
+                            <div class = "cell cell_price" 
+                                ng-click = "listCustom.removeSkill($index)"> 
                                 -{{skill.price}}
                             </div>
 
@@ -121,11 +122,19 @@
                             <div class = "cell"
                                 ng-if = "listGeneral.isSkillEnableByCount(item)">
                                 
-                                <div ng-if = "listGeneral.isSkillEnableByRequirements(item)"
-                                    ng-click = "listGeneral.chooseSkill($index)">
-                                    +{{item.price}}
+                                <div ng-if = "listGeneral.isSkillEnableByRequirements(item)">
+                                    <div ng-if = "!listGeneral.hasConflict(item)"
+                                        ng-click = "listGeneral.chooseSkill($index)"
+                                        class = "skillEnable">
+                                            +{{item.price}}                                    
+                                    </div>
+                                    <div ng-if = "listGeneral.hasConflict(item)"
+                                        class = "skillNotEnable">
+                                            {{item.price}}                                    
+                                    </div>
                                 </div>
-                                <div ng-if = "!listGeneral.isSkillEnableByRequirements(item)">
+                                <div ng-if = "!listGeneral.isSkillEnableByRequirements(item)"
+                                    class = "skillNotRequired">
                                     {{item.price}}
                                 </div>
                             </div>
