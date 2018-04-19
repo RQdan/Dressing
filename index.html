@@ -134,8 +134,16 @@
                                     </div>
                                 </div>
                                 <div ng-if = "!listGeneral.isSkillEnableByRequirements(item)"
-                                    class = "skillNotRequired">
-                                    {{item.price}}
+                                    >
+                                    <div ng-if = "!listGeneral.hasConflict(item)"
+                                        ng-click = "listGeneral.chooseSkill($index)"
+                                        class = "skillNotRequired">
+                                            {{item.price}}                                    
+                                    </div>
+                                    <div ng-if = "listGeneral.hasConflict(item)"
+                                        class = "skillHasConflict">
+                                            {{item.price}}                                    
+                                    </div>
                                 </div>
                             </div>
                             <div class = "cell"
