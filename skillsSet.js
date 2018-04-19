@@ -119,7 +119,17 @@ function SkillsListGeneral(CustomSkills, $http, $q) {
     };
     
     listGeneral.hasConflict = function( skill ) {
-    
+        
+        if( skill.stats.statControl[1006] === undefined ) return false;
+        
+        var conflictSkills = skill.stats.statControl[1006];
+        
+        if( conflictSkills.some( function( skillId ) {
+        
+            return CustomSkills.IsSkillInList( skillId );
+        
+        } ) ) return true;
+        
         return false;
     
     }
@@ -334,13 +344,9 @@ function CustomSkillsService() {
         
         // рекурсійний пошук і видалення здібностей, які залежать від видаленої
         if( Boolean( chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ] ) === false ) {        
-            
-            console.log( 'deleting ', skill.skill );
-            
+
             var linkedSkillIndex = GetLinkedSkillIndex( skill.id );
-            
-            console.log( 'next index ', linkedSkillIndex );
-            
+
             while( ~linkedSkillIndex ) {
             
                 service.removeSkill( linkedSkillIndex );
@@ -410,8 +416,6 @@ function CustomSkillsService() {
   function GetLinkedSkillIndex( id ) {
 
     var index = -1;
-    
-    console.log( 'matching id ', id.subCategoryId + ' : ' + id.skillId );
     
     skills.list.some( function( skill, i ) {
         

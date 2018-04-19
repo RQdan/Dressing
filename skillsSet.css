@@ -93,6 +93,6 @@
 .skillNotRequired {
     background-color: yellow;
 }
-.skillNotRequired {
+.skillHasConflict {
     background-color: red;
 }
