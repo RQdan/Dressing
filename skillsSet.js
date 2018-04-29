@@ -108,14 +108,14 @@ function SkillsListGeneral(CustomSkills, $http, $q) {
         
         if( skill.stats.statControl[1004] === undefined ) return true;
         
-        if( skill.stats.statControl[1004].every( function( skillId ) {
+        if( skill.stats.statControl[1004].every( function( requirement ) {
         
-            return CustomSkills.IsSkillInList( skillId );
+            return CustomSkills.meetRequirements( requirement );
         
         } ) ) return true;
         
-        return false;
-    
+        return false;        
+   
     };
     
     listGeneral.hasConflict = function( skill ) {
@@ -395,6 +395,66 @@ function CustomSkillsService() {
     
     };
   
+  service.meetRequirements = function MeetRequirements( requirement ) {
+            
+            if( requirement === undefined ) return true;
+            
+            switch ( requirement.type ) {
+            
+                case 'OR': {
+                
+                    return MeetRequirementsOR( requirement.list );
+                
+                }
+                case 'AND': {
+                
+                    return MeetRequirementsAND( requirement.list );
+                
+                }
+                case 'NOT': {
+                
+                    return MeetRequirementsNOT( requirement.list );
+                
+                }
+                
+                default: return service.IsSkillInList( requirement );
+            
+            }
+        
+        }
+        
+        function MeetRequirementsOR( list ) {
+        
+            return list.some( function( requirement ) {
+            
+                return service.meetRequirements( requirement );
+            
+            } );
+        
+        }
+        
+        function MeetRequirementsAND( list ) {
+        
+            return list.every( function( requirement ) {
+            
+                return service.meetRequirements( requirement );
+            
+            } );
+        
+        }
+        
+        function MeetRequirementsNOT( list ) {
+        
+            return list.every( function( requirement ) {
+            
+                return !service.meetRequirements( requirement );
+            
+            } )
+        
+        }
+
+  
+  
   function ChangeChosenSkillsList( skill, addBool ) {
     
     if( addBool ) {
@@ -418,19 +478,17 @@ function CustomSkillsService() {
     var index = -1;
     
     skills.list.some( function( skill, i ) {
+    
+        if( skill.stats.statControl[1004] === undefined ) return false;
         
-        var linkedArr = skill.stats.statControl[1004];
+        if( !skill.stats.statControl[1004].every( function( requirement ) {
         
-        if( linkedArr === undefined ) return false;
+            if( service.meetRequirements( requirement ) ) return true;
         
-        for( var j = 0; j < linkedArr.length; j++ ) {
+        } ) ) {
         
-            if( (linkedArr[j].subCategoryId === id.subCategoryId) && (linkedArr[j].skillId === id.skillId) ) {            
-            
-                index = i;
-                return true;
-            
-            }
+            index = i;
+            return true;
         
         }
     
@@ -492,5 +550,7 @@ function EventsNote( $http, $q ) {
     };
 
 }
+
+        
 
 })();
