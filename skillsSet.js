@@ -312,7 +312,6 @@ function CustomSkillsService() {
         
         //збільшення кількості екземплярів здібності, що були додані до набору
         ChangeChosenSkillsList(skill, true);
-        //choosedSkillsList[skill.skill] = ++choosedSkillsList[skill.skill] || 1;
     
     };
     
@@ -343,7 +342,7 @@ function CustomSkillsService() {
         }
         
         // рекурсійний пошук і видалення здібностей, які залежать від видаленої
-        if( Boolean( chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ] ) === false ) {        
+        if( ( Boolean( chosenSkillsList[ skill.id.subCategoryId ] ) && ( Boolean( chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ] ) ) ) === false ) {        
 
             var linkedSkillIndex = GetLinkedSkillIndex( skill.id );
 
@@ -390,6 +389,9 @@ function CustomSkillsService() {
     service.IsSkillInList = function( skillId ) {
     
         if( chosenSkillsList[ skillId.subCategoryId ] === undefined ) return false;
+        
+        //ANY means for all skills in particular subCategory
+        if( skillId.skillId === "ANY" ) return true;
         
         return chosenSkillsList[ skillId.subCategoryId ][ skillId.skillId ];
     
@@ -468,6 +470,18 @@ function CustomSkillsService() {
     } else {
       
       --chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ];
+      
+      if( chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ] === 0 ) {
+      
+        delete chosenSkillsList[ skill.id.subCategoryId ][ skill.id.skillId ];
+        
+        if( Object.keys( chosenSkillsList[ skill.id.subCategoryId ] ).length === 0 ) {
+        
+            delete chosenSkillsList[ skill.id.subCategoryId ];
+        
+        }
+      
+      }
       
     }
     
